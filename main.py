@@ -2,6 +2,7 @@ from scipy.stats import norm
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import timer
 
 import data_loader
 from algo.percentile import percentile_based_outlier
@@ -18,7 +19,7 @@ def run_mad_anom_detection():
         if r[i]:
             plt.plot(data.index[i], data.values[i], 'ro')
 
-    plt.show()
+    return plt
 
 def run_percentile_detection():
     data = data_loader.load_data(SAMPLE_FILE_PATH)
@@ -35,7 +36,7 @@ def run_percentile_detection():
         if r[0].values[i]:
             plt.plot(data.index[i], data.values[i], 'ro')
 
-    plt.show()
+    return plt
 
 import sys
 import getopt
@@ -47,9 +48,17 @@ def main():
         if opt_name in ('-a', '--algo'):
             algo_type = opt_value
 
+    plt = None
+
+    sw = timer.Timer()
+    sw.start()
     if algo_type == 'mad':
-        run_mad_anom_detection()
+        plt = run_mad_anom_detection()
     else:
-        run_percentile_detection()
+        plt = run_percentile_detection()
+    sw.stop()
+    print(sw.elapsed())
+
+    plt.show()
 
 main()
