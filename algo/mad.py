@@ -27,4 +27,8 @@ def get_mad_outlier(points, thresh=3.5):
     abs_dev_bounds = thresh * med_abs_dev / norm.ppf(0.75)
     abs_upper = med + abs_dev_bounds
     abs_lower = med - abs_dev_bounds
+
+    abs_upper = abs_upper[0] if abs_upper.size == 1 else None
+    abs_lower = abs_lower[0] if abs_lower.size == 1 else None
+
     return abs_upper, abs_lower

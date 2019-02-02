@@ -1,47 +1,8 @@
-from scipy.stats import norm
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-import data_loader
-from algo.percentile import percentile_based_outlier
-from algo.mad import (mad_based_outlier, get_mad_outlier)
+from shared.madrunner import run_mad_anom_detection
+from shared.percentilerunner import run_percentile_detection
+from shared.madflowrunner import run_mad_anom_detection_flow
 
 SAMPLE_FILE_PATH = './data/santaba-demo4.csv'
-
-def run_mad_anom_detection():
-    data = data_loader.load_data(SAMPLE_FILE_PATH)
-    r = mad_based_outlier(data)
-
-    r1 = get_mad_outlier(data)
-    max_values = [r1[0][0] for i in range(len(r))]
-    min_values = [r1[1][0] for i in range(len(r))]
-    plt.plot(data.index, min_values)
-    plt.plot(data.index, max_values)
-    
-    plt.plot(data.index, data.values)
-    for i in range(len(r)):
-        if r[i]:
-            plt.plot(data.index[i], data.values[i], 'ro')
-
-    plt.show()
-
-def run_percentile_detection():
-    data = data_loader.load_data(SAMPLE_FILE_PATH)
-    r = percentile_based_outlier(data)
-
-    min_values = [r[1] for i in range(len(r[0]))]
-    max_values = [r[2] for i in range(len(r[0]))]
-
-    plt.plot(data.index, data.values)
-    plt.plot(data.index, min_values)
-    plt.plot(data.index, max_values)
-
-    for i in range(len(r[0])):
-        if r[0].values[i]:
-            plt.plot(data.index[i], data.values[i], 'ro')
-
-    plt.show()
 
 import sys
 import getopt
@@ -54,16 +15,10 @@ def main():
             algo_type = opt_value
 
     if algo_type == 'mad':
-        run_mad_anom_detection()
+        run_mad_anom_detection(SAMPLE_FILE_PATH)
+    elif algo_type == 'mad_flow':
+        run_mad_anom_detection_flow(SAMPLE_FILE_PATH)
     else:
-        run_percentile_detection()
-
-
-def main1():
-    nums = np.asarray([1,4,23,60,80])
-    # meds = np.median(np.asarray(nums), axis=0)
-    nums1 = np.sum(nums ** 2, axis=-1)
-    nums1 = np.sqrt(nums1)
-    print(nums1)
+        run_percentile_detection(SAMPLE_FILE_PATH)
 
 main()

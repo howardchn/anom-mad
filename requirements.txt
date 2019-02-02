@@ -10,3 +10,4 @@ pytz==2018.7
 rope==0.11.0
 scipy==1.2.0
 six==1.12.0
+stopwatch.py==1.0.1
