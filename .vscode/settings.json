@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "~/Projects/GitHub/anomaly-detection-mad/bin/python3",
-    "python.venvPath": "~/Projects/GitHub/anomaly-detection-mad"
+    "python.pythonPath": "bin/python3",
+    "python.venvPath": "${workspaceFolder}"
 }

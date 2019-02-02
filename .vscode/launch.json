@@ -8,6 +8,7 @@
             "name": "Python: Current File (Integrated Terminal)",
             "type": "python",
             "request": "launch",
+            "pythonPath": "${config:python.pythonPath}",
             "program": "${file}",
             "console": "integratedTerminal"
         },

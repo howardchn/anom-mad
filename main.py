@@ -5,13 +5,19 @@ import matplotlib.pyplot as plt
 
 import data_loader
 from algo.percentile import percentile_based_outlier
-from algo.mad import mad_based_outlier
+from algo.mad import (mad_based_outlier, get_mad_outlier)
 
 SAMPLE_FILE_PATH = './data/santaba-demo4.csv'
 
 def run_mad_anom_detection():
     data = data_loader.load_data(SAMPLE_FILE_PATH)
     r = mad_based_outlier(data)
+
+    r1 = get_mad_outlier(data)
+    max_values = [r1[0][0] for i in range(len(r))]
+    min_values = [r1[1][0] for i in range(len(r))]
+    plt.plot(data.index, min_values)
+    plt.plot(data.index, max_values)
     
     plt.plot(data.index, data.values)
     for i in range(len(r)):
@@ -51,5 +57,13 @@ def main():
         run_mad_anom_detection()
     else:
         run_percentile_detection()
+
+
+def main1():
+    nums = np.asarray([1,4,23,60,80])
+    # meds = np.median(np.asarray(nums), axis=0)
+    nums1 = np.sum(nums ** 2, axis=-1)
+    nums1 = np.sqrt(nums1)
+    print(nums1)
 
 main()
