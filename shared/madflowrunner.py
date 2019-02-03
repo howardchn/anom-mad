@@ -19,7 +19,6 @@ def run_mad_anom_detection_flow(file_path, block_size = 30):
 
     sw = Stopwatch()
     sw.start()
-    columns = ['max', 'min', 'raw', 'ts']
     df = []
     try:
         for data_block in data_flow:
@@ -31,9 +30,11 @@ def run_mad_anom_detection_flow(file_path, block_size = 30):
     sw.stop()
     print(sw.duration)
 
+    columns = ['max', 'min', 'raw', 'ts', 'med']
     df = DataFrame(df, columns = columns)
     plt.fill_between(df['ts'].values, df['max'].values, df['min'].values, color='lightgray')
     plt.plot(df['ts'].values, df['raw'].values)
+    plt.plot(df['ts'].values, df['med'].values)
 
     for i in range(len(df)):
         raw_row = df.values[i]

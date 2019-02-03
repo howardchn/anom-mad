@@ -1,5 +1,5 @@
 from shared.madrunner import run_mad_anom_detection
-from shared.percentilerunner import run_percentile_detection
+from shared.percentilerunner import (run_percentile_detection, run_percentile_detection_flow)
 from shared.madflowrunner import run_mad_anom_detection_flow
 
 SAMPLE_FILE_PATH = './data/santaba-demo4.csv'
@@ -18,6 +18,8 @@ def main():
         run_mad_anom_detection(SAMPLE_FILE_PATH)
     elif algo_type == 'mad_flow':
         run_mad_anom_detection_flow(SAMPLE_FILE_PATH)
+    elif algo_type == 'percentile_flow':
+        run_percentile_detection_flow(SAMPLE_FILE_PATH)
     else:
         run_percentile_detection(SAMPLE_FILE_PATH)
 

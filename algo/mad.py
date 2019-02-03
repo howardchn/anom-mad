@@ -15,7 +15,7 @@ def mad_based_outlier(points, thresh=3.5):
     return mod_z_score > thresh
 
 def get_mad_outlier(points, thresh=3.5):
-    last_index = points.size - 1
+    last_index = len(points) - 1
 
     last_ts = points.index[last_index]
     if type(points) is list:
@@ -34,4 +34,4 @@ def get_mad_outlier(points, thresh=3.5):
     abs_upper = abs_upper[0] if abs_upper.size == 1 else None
     abs_lower = abs_lower[0] if abs_lower.size == 1 else None
 
-    return abs_upper, abs_lower, points[last_index][0], last_ts
+    return abs_upper, abs_lower, points[last_index][0], last_ts, med

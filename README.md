@@ -32,3 +32,10 @@ $ python main.py -a mad_flow
 ```
 
 ![screenshot-mad-flow](https://github.com/howardchn/anom-mad/raw/master/images/anom-mad-flow.png)
+
+Also with Percentile, the outerline is rendered as:
+```
+$ python main.py -a percentile_flow
+```
+
+![screenshot-percentile_flow](https://github.com/howardchn/anom-mad/raw/master/images/anom-percentile-flow.png)
